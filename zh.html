@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>何淇丹（Flanker）— 安全研究员</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sidebar-width: 220px;
+      --text: #222;
+      --muted: #555;
+      --faint: #888;
+      --border: #e0e0e0;
+      --accent: #1a56a0;
+      --bg: #fff;
+      --sidebar-bg: #f8f8f6;
+    }
+
+    body {
+      font-family: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', Georgia, serif;
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--text);
+      background: var(--bg);
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .layout {
+      display: flex;
+      min-height: 100vh;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      width: var(--sidebar-width);
+      flex-shrink: 0;
+      background: var(--sidebar-bg);
+      border-right: 1px solid var(--border);
+      padding: 44px 22px 44px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    .avatar-wrap { text-align: center; margin-bottom: 18px; }
+
+    .avatar {
+      width: 112px; height: 112px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      object-fit: cover;
+      display: inline-block;
+    }
+
+    .avatar-placeholder {
+      width: 112px; height: 112px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      background: #ddd;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #aaa;
+      font-size: 12px;
+      font-family: sans-serif;
+    }
+
+    .sidebar-name {
+      font-size: 17px;
+      font-weight: bold;
+      color: var(--text);
+      text-align: center;
+      margin-bottom: 3px;
+    }
+
+    .sidebar-role {
+      font-size: 12px;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.5;
+      margin-bottom: 22px;
+    }
+
+    .sidebar-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .sidebar-links li a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12.5px;
+      font-family: 'Helvetica Neue', sans-serif;
+      color: var(--muted);
+      padding: 5px 8px;
+      border-radius: 4px;
+      border: 1px solid transparent;
+      transition: border-color 0.15s, color 0.15s;
+    }
+
+    .sidebar-links li a:hover {
+      border-color: var(--border);
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .icon { width: 15px; text-align: center; opacity: 0.6; }
+
+    .sidebar-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 20px 0;
+    }
+
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+
+    .sidebar-nav li a {
+      font-size: 12px;
+      font-family: 'Helvetica Neue', sans-serif;
+      color: var(--faint);
+      display: block;
+      padding: 3px 8px;
+      border-radius: 3px;
+    }
+
+    .sidebar-nav li a:hover {
+      color: var(--accent);
+      text-decoration: none;
+      background: #ebebeb;
+    }
+
+    /* ── Main ── */
+    .main {
+      flex: 1;
+      padding: 52px 56px 100px;
+      min-width: 0;
+    }
+
+    section { margin-bottom: 52px; }
+
+    h2 {
+      font-size: 16.5px;
+      font-weight: bold;
+      color: var(--text);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 6px;
+      margin-bottom: 20px;
+      letter-spacing: 0.01em;
+    }
+
+    /* ── Bio ── */
+    .bio p {
+      font-size: 15px;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 13px;
+    }
+
+    .bio p:last-child { margin-bottom: 0; }
+
+    .bio-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 18px;
+    }
+
+    .tag {
+      font-size: 11.5px;
+      font-family: 'Helvetica Neue', sans-serif;
+      padding: 3px 10px;
+      background: #f0f0ee;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      color: var(--muted);
+    }
+
+    /* ── Publications ── */
+    .pub-list {
+      list-style: decimal;
+      padding-left: 22px;
+    }
+
+    .pub-list li {
+      margin-bottom: 11px;
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    .pub-venue, a.pub-venue { font-weight: bold; font-style: italic; color: var(--text); text-decoration: none; }
+    a.pub-venue:hover { color: var(--accent); text-decoration: underline; }
+
+    .badge {
+      display: inline-block;
+      font-size: 10px;
+      font-family: 'Helvetica Neue', sans-serif;
+      padding: 1px 6px;
+      border-radius: 2px;
+      border: 1px solid;
+      vertical-align: middle;
+      margin-left: 4px;
+      font-weight: bold;
+      letter-spacing: 0.03em;
+    }
+
+    .badge-a   { color: #b03020; border-color: #b03020; background: #fdf0ef; }
+    .badge-b   { color: #856404; border-color: #c9a400; background: #fdfbef; }
+    .badge-bh  { color: #c0550a; border-color: #c0550a; background: #fef5ef; }
+    .badge-dc  { color: #555;    border-color: #999;    background: #f5f5f5; }
+
+    /* ── Awards ── */
+    .award-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+
+    .award-list li { font-size: 14px; color: var(--muted); padding-left: 16px; position: relative; line-height: 1.6; }
+
+    .award-list li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--border);
+    }
+
+    .award-list li strong { color: var(--text); }
+
+    /* ── Service / misc lists ── */
+    .plain-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+
+    .plain-list li {
+      font-size: 14px;
+      color: var(--muted);
+      padding-left: 16px;
+      position: relative;
+      line-height: 1.65;
+    }
+
+    .plain-list li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--border);
+    }
+
+    /* ── CVE ── */
+    .cve-intro {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 14px;
+      line-height: 1.75;
+    }
+
+    .cve-list {
+      font-family: 'Courier New', monospace;
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.95;
+      word-break: break-all;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 760px) {
+      .layout { flex-direction: column; }
+
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: static;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding: 28px 24px 20px;
+      }
+
+      .sidebar-links { flex-direction: row; flex-wrap: wrap; }
+      .sidebar-nav { display: none; }
+      .main { padding: 32px 20px 60px; }
+    }
+  </style>
+</head>
+<body>
+<div class="layout">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="avatar-wrap">
+      <img class="avatar" src="avatar.jpg" alt="何淇丹">
+    </div>
+
+    <div class="sidebar-name">何淇丹（Flanker）</div>
+    <div class="sidebar-role">高级总监 &amp; 首席安全研究员</div>
+
+    <ul class="sidebar-links">
+      <li><a href="mailto:i@flanker017.me"><span class="icon">✉</span> 邮件</a></li>
+      <li><a href="https://github.com/flankerhqd" target="_blank" rel="noopener"><span class="icon">⌥</span> GitHub</a></li>
+      <li><a href="https://blog.flanker017.me" target="_blank" rel="noopener"><span class="icon">✍</span> 博客</a></li>
+      <li><a href="https://dawnslab.jd.com/" target="_blank" rel="noopener"><span class="icon">🔬</span> 獬豸安全实验室</a></li>
+      <li><a href="https://opencyvis.ai/" target="_blank" rel="noopener"><span class="icon">📱</span> OpenCyvis</a></li>
+      <li><a href="/index.html"><span class="icon">🌐</span> English</a></li>
+    </ul>
+
+    <hr class="sidebar-divider">
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li><a href="#bio">简介</a></li>
+        <li><a href="#publications">论文与演讲</a></li>
+        <li><a href="#awards">荣誉与奖项</a></li>
+        <li><a href="#service">学术与社会服务</a></li>
+        <li><a href="#education">教育经历</a></li>
+        <li><a href="#coverage">媒体报道</a></li>
+        <li><a href="#cve">CVE 研究</a></li>
+        <li><a href="#patents">专利</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Main -->
+  <main class="main">
+
+    <section id="bio">
+      <h2>简介</h2>
+      <div class="bio">
+        <p>
+          我是<strong>京东集团</strong>高级总监及首席安全研究员，专注于大规模安全体系建设、风险控制与 AI 驱动的防御能力。我创立了
+          <a href="https://dawnslab.jd.com/" target="_blank" rel="noopener"><strong>獬豸安全实验室</strong></a>，并现兼管广告营销反作弊业务，覆盖安全研究、广告反欺诈、威胁情报、供应链基础设施安全及 AI for Security 方向。我同时担任京东博士管培生导师与 TGT（Tech Genius Team）导师，指导多名博士及顶尖技术人才。
+        </p>
+        <p>
+          我目前参与创建 <a href="https://opencyvis.ai/" target="_blank" rel="noopener">OpenCyvis</a>——一款开源 AI 手机，旨在提供可审计、用户可控的替代方案，对抗黑盒商业 AI 手机。OpenCyvis 的 Agent 框架与模型选择完全开放：开发者可以查阅代码、选择自己的 AI 模型、运行本地模型，并掌控数据流向。该项目融合了我在移动安全、AI Agent、自动化与可控 AI 原生系统方面的研究兴趣。
+        </p>
+        <p>
+          此前，我曾主导拼多多安全团队，从零搭建其安全体系；更早之前，我在腾讯科恩安全实验室从事前沿漏洞研究与移动安全工作。我是 <a href="https://www.zerodayinitiative.com/blog/tag/Pwn2Own" target="_blank" rel="noopener">Pwn2Own</a> 2016、Mobile Pwn2Own 2016 与 2017 冠军，成功攻破当时最新版 macOS 和 Android 系统，荣获 <strong>Master of Pwn</strong> 称号。我是<a href="https://www.insc.tsinghua.edu.cn/info/1184/4013.htm" target="_blank" rel="noopener">蓝莲花战队</a>早期创始成员之一——这是亚洲首支打入 DEF CON CTF 总决赛的战队；同时也是浙江大学 AAA 战队与网络安全协会的创始成员。
+        </p>
+        <p>
+          我的研究成果曾在 Black Hat、DEF CON、CanSecWest 等顶级安全会议上发表。我多次获得 Pwn2Own 冠军，并荣获 <a href="https://pwnies.com/mystique-in-the-house-the-droid-vulnerability-chain-that-owns-all-your-userspace/" target="_blank" rel="noopener"><strong>2022 年 Pwnie Award 最佳提权漏洞奖</strong></a>。我因发现数百个严重 CVE 漏洞，获得 Google、三星、苹果、华为等厂商致谢，并在 ACM ISSTA、USENIX 等顶级学术会议发表论文。我担任国际顶级安全竞赛 GeekPwn 评审委员，以及中国计算机学会（CCF）网络与系统安全专业委员会执行委员。
+        </p>
+        <div class="bio-tags">
+          <span class="tag">移动安全</span>
+          <span class="tag">漏洞研究</span>
+          <span class="tag">Android / iOS</span>
+          <span class="tag">IoT 安全</span>
+          <span class="tag">软件供应链安全</span>
+          <span class="tag">广告反欺诈</span>
+          <span class="tag">AI 安全</span>
+          <span class="tag">模糊测试</span>
+          <span class="tag">CISSP</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="publications">
+      <h2>论文与演讲</h2>
+      <ol class="pub-list">
+        <li>From Breakthrough to Completeness: ARKDecompiler — The Decompiler for HarmonyOS Next. <a class="pub-venue" href="https://blackhat.com/us-26/arsenal/schedule/index.html#from-breakthrough-to-completeness-arkdecompiler---the-decompiler-for-harmonyos-next-52619" target="_blank" rel="noopener">Black Hat USA Arsenal</a>, 拉斯维加斯. 2026. <span class="badge badge-bh">BH Arsenal</span></li>
+        <li>BadResolve: Bypassing Android's Intent Checks to Resurrect LaunchAnywhere Privilege Escalations. <a class="pub-venue" href="https://www.secwest.net/presentations-2025/badresolve-bypassing-androids-intent-checks-to-resurrect-launchanywhere-privilege-escalations" target="_blank" rel="noopener">CanSecWest</a>, 温哥华. 2025.</li>
+        <li>Dead Made Alive Again: Bypassing Intent Destination Checks and Reintroducing LaunchAnyWhere Privilege Escalation. <a class="pub-venue" href="https://defcon.org/html/defcon-33/dc-33-speakers.html#content_60309" target="_blank" rel="noopener">DEF CON 33</a>, 拉斯维加斯. 2025. <span class="badge badge-dc">DEF CON</span></li>
+        <li>Unveiling Mac Security: A Comprehensive Exploration of Sandboxing and AppData TCC. <a class="pub-venue" href="https://www.blackhat.com/us-24/briefings/schedule/#unveiling-mac-security-a-comprehensive-exploration-of-sandboxing-and-appdata-tcc-39452" target="_blank" rel="noopener">Black Hat USA</a>, 拉斯维加斯. 2024. <span class="badge badge-bh">BH USA</span></li>
+        <li>Uncovering and Mitigating the Impact of Code Obfuscation on Dataset Annotation with Antivirus Engines. <a class="pub-venue" href="https://conf.researchr.org/home/issta-2024" target="_blank" rel="noopener">ISSTA 2024</a>, 维也纳. 2024. <span class="badge badge-a">CCF-A</span></li>
+        <li>PMDET: A new fuzzing-based detection tool for Android Parcel Mismatch bugs. <a class="pub-venue" href="https://ieeexplore.ieee.org/document/10589833/" target="_blank" rel="noopener">SANER 2024</a>, 芬兰. 2024. <span class="badge badge-b">CCF-B</span></li>
+        <li>Detecting Novel Malware Classes with a Foundational Multi-Modality Data Analysis Model. <a class="pub-venue" href="https://direct.mit.edu/dint" target="_blank" rel="noopener">Data Intelligence</a>. 2024.</li>
+        <li>PMDET: A new fuzzing-based detection tool for Android Parcel Mismatch bugs. <a class="pub-venue" href="https://www.blackhat.com/asia-24/arsenal/schedule/" target="_blank" rel="noopener">Black Hat Asia Arsenal</a>, 新加坡. 2024. <span class="badge badge-bh">BH Arsenal</span></li>
+        <li>RIDE: Efficient Highly-Precise Systematic Automatic Bug Hunting in Android Systems. <a class="pub-venue" href="https://www.blackhat.com/us-22/arsenal/schedule/" target="_blank" rel="noopener">Black Hat USA Arsenal</a>, 拉斯维加斯. 2022. <span class="badge badge-bh">BH Arsenal</span></li>
+        <li>Mystique in the House: The Droid Vulnerability Chain that Owns All Your Applications. <a class="pub-venue" href="https://www.secwest.net/csw22presentations/mystiquehits" target="_blank" rel="noopener">CanSecWest</a>, 温哥华. 2022.</li>
+        <li>The Hidden RCE Surfaces That Control the Droids. <a class="pub-venue" href="https://i.blackhat.com/Asia-22/Friday-Materials/AS-22-He-The-Hidden-RCE-Surfaces-That-Control-The-Droids.pdf" target="_blank" rel="noopener">Black Hat Asia</a>, 新加坡. 2022. <span class="badge badge-bh">BH Asia</span></li>
+        <li>La La Land: Theory and Practice on Large-Scale Static Bug Hunting for Android Systems. <a class="pub-venue" href="https://mosec.org/" target="_blank" rel="noopener">MOSEC</a>, 上海. 2022.</li>
+        <li>DroidCorn: A Practical New Framework for Blackbox Android Binary Fuzzing. <a class="pub-venue" href="https://mosec.org/" target="_blank" rel="noopener">MOSEC</a>, 上海. 2020.</li>
+        <li>Pwning the Nexus of Every Pixel. <a class="pub-venue" href="https://www.cansecwest.com/" target="_blank" rel="noopener">CanSecWest</a>, 温哥华. 2017.</li>
+        <li>Subverting Apple Graphics: Practical Approaches to Remotely Gaining Root. <a class="pub-venue" href="https://www.blackhat.com/docs/us-16/materials/us-16-Chen-Subverting-Apple-Graphics-Practical-Approaches-To-Remotely-Gaining-Root-wp.pdf" target="_blank" rel="noopener">Black Hat USA</a>, 拉斯维加斯. 2016. <span class="badge badge-bh">BH USA</span></li>
+        <li>Escaping the Sandbox by Not Breaking it. <a class="pub-venue" href="https://defcon.org/html/defcon-24/dc-24-index.html" target="_blank" rel="noopener">DEF CON</a>, 拉斯维加斯. 2016. <span class="badge badge-dc">DEF CON</span></li>
+        <li>Don't trust your eyes — Apple Graphics is compromised! <a class="pub-venue" href="https://www.cansecwest.com/" target="_blank" rel="noopener">CanSecWest</a>, 温哥华. 2016.</li>
+        <li>Hey Your Parcel Looks Bad — Fuzzing and Exploiting Parcel-ization Vulnerabilities in Android. <a class="pub-venue" href="https://www.blackhat.com/docs/asia-16/materials/asia-16-He-Hey-Your-Parcel-Looks-Bad-Fuzzing-And-Exploiting-Parcelization-Vulnerabilities-In-Android.pdf" target="_blank" rel="noopener">Black Hat Asia</a>, 新加坡. 2016. <span class="badge badge-bh">BH Asia</span></li>
+        <li>Shooting the OSX El Capitan Kernel Like a Sniper. <a class="pub-venue" href="https://recon.cx/" target="_blank" rel="noopener">REcon</a>, 蒙特利尔. 2016.</li>
+        <li>Hacking Phones from 2013 to 2016. <span class="pub-venue">首尔</span>, 韩国. 2016.</li>
+        <li>Vulnerabilities in the third-party SDKs of Android applications. <a class="pub-venue" href="https://hitcon.org/" target="_blank" rel="noopener">HITCON</a>, 台北. 2015.</li>
+      </ol>
+    </section>
+
+    <section id="awards">
+      <h2>荣誉与奖项</h2>
+      <ul class="award-list">
+        <li><a href="https://pwnies.com/mystique-in-the-house-the-droid-vulnerability-chain-that-owns-all-your-userspace/" target="_blank" rel="noopener"><strong>Pwnie Award — 最佳提权漏洞奖</strong></a>，Black Hat USA，拉斯维加斯. 2022.</li>
+        <li><a href="https://www.zerodayinitiative.com/blog/tag/Pwn2Own" target="_blank" rel="noopener"><strong>Pwn2Own 冠军 &amp; Master of Pwn</strong></a>，东京 &amp; 温哥华. 2016, 2017.</li>
+        <li><strong>Pwnie Award 提名</strong>，Black Hat USA，拉斯维加斯. 2017.</li>
+        <li><strong>京东集团黑客马拉松一等奖</strong>. 2025.</li>
+        <li><strong>京东集团技术金项奖提名</strong>（京东集团技术最高荣誉）. 2023、2024.</li>
+        <li><strong>京东集团 CCO 特别奖</strong>. 2024.</li>
+        <li><strong>腾讯公司级技术突破奖</strong>（腾讯最高技术荣誉）. 腾讯.</li>
+        <li><strong>Google 安全名人堂</strong> — Android 类别 Top 10.</li>
+        <li><strong>三星安全名人堂</strong> — 排名第 6（2021、2022）.</li>
+        <li><strong>华为安全名人堂</strong> — 排名第 3（2020）.</li>
+      </ul>
+    </section>
+
+    <section id="service">
+      <h2>学术与社会服务</h2>
+      <ul class="plain-list">
+        <li>评审委员，GeekPwn &amp; GeekCon 国际顶级安全竞赛</li>
+        <li>中国计算机学会（CCF）网络与系统安全专业委员会执行委员</li>
+        <li>导师，京东 TGT（Tech Genius Team）顶级全球人才项目</li>
+        <li>网络安全委员会委员，北京 2022 年冬奥会</li>
+        <li><a href="https://cloud.tencent.com/tvp/member/850" target="_blank" rel="noopener">腾讯云 TVP（最具价值专家）</a>. 2025.</li>
+        <li>评委，腾讯云黑客松</li>
+        <li>早期创始成员，<a href="https://www.insc.tsinghua.edu.cn/info/1184/4013.htm" target="_blank" rel="noopener">蓝莲花战队</a>——亚洲首支打入 DEF CON CTF 总决赛的战队</li>
+        <li>创始成员，浙江大学 AAA 战队与网络安全协会</li>
+      </ul>
+    </section>
+
+    <section id="education">
+      <h2>教育经历</h2>
+      <ul class="plain-list">
+        <li>
+          <strong>浙江大学</strong> — 计算机科学与技术，工学学士
+        </li>
+        <li>
+          <strong>香港科技大学</strong> — 访问学者，软件工程系. 导师：张成志（Prof. Shing Chi Cheung）.
+        </li>
+      </ul>
+    </section>
+
+    <section id="coverage">
+      <h2>媒体报道</h2>
+      <ul class="plain-list">
+        <li><a href="https://www.securityweek.com/nexus-6p-iphone-6s-hacked-mobile-pwn2own-2016/" target="_blank" rel="noopener">Nexus 6P、iPhone 6S 在 Mobile Pwn2Own 2016 被攻破</a> — SecurityWeek, 2016</li>
+        <li><a href="http://www.news.zju.edu.cn/2016/1103/c775a246883/page.htm" target="_blank" rel="noopener">浙大学生在顶级黑客大赛上夺冠，十秒钟攻破谷歌智能手机</a> — 钱江晚报（转自浙大新闻网）, 2016</li>
+        <li><a href="https://china.huanqiu.com/article/9CaKrnK3Ur6" target="_blank" rel="noopener">浙大黑客团队夺得 Pwn2Own 世界冠军</a> — 环球网, 2017</li>
+        <li><a href="https://bbs.kanxue.com/article-11715.htm" target="_blank" rel="noopener">对话 Flanker | 十年饮冰，难凉热血</a> — 看雪安全论坛, 2020</li>
+        <li><a href="https://www.darkreading.com/edge-slideshows/the-highlights-of-the-2022-pwnie-awards" target="_blank" rel="noopener">2022 年 Pwnie Awards 精彩回顾</a> — Dark Reading, 2022</li>
+        <li><a href="https://securityaffairs.com/52723/hacking/pwn2own-2016.html" target="_blank" rel="noopener">Pwn2Own 2016 — 腾讯科恩安全实验室夺冠</a> — Security Affairs, 2016</li>
+        <li><a href="https://venturebeat.com/security/pwn2own-2016-chrome-edge-and-safari-hacked-460k-awarded-in-total/" target="_blank" rel="noopener">Pwn2Own 2016：Chrome、Edge、Safari 被攻破，共奖励 46 万美元</a> — VentureBeat, 2016</li>
+        <li><a href="https://thehackernews.com/2016/10/hacking-team-pwn2own.html" target="_blank" rel="noopener">中国黑客在 Mobile Pwn2Own 攻破 iPhone 和 Nexus，赢得 21.5 万美元</a> — The Hacker News, 2016</li>
+        <li><a href="http://edu.people.com.cn/n1/2017/0706/c1053-29386949.html" target="_blank" rel="noopener">腾讯、360 安全提名黑客界"奥斯卡" Pwnie Award</a> — 人民日报, 2017</li>
+        <li><a href="https://news.ycombinator.com/item?id=41437611" target="_blank" rel="noopener">Unveiling Mac Security: Comprehensive Exploration of Sandboxing and AppData TCC</a> — Hacker News, 2024</li>
+        <li><a href="https://xdaforums.com/t/app-aosp-system-app-open-source-ai-opencyvis-the-open-source-ai-phone-agent-with-virtual-display-local-llm-support.4788070/" target="_blank" rel="noopener">OpenCyvis — 支持虚拟显示与本地 LLM 的开源 AI 手机 Agent</a> — XDA Forums, 2025</li>
+        <li><a href="https://m.21jingji.com/article/20150509/3e723887b0e4c4123323a57afa13adb1.html" target="_blank" rel="noopener">专访信息安全专家何淇丹：如何让可穿戴设备更安全？</a> — 21 世纪经济报道, 2015</li>
+        <li><a href="https://ex.chinadaily.com.cn/exchange/partners/82/rss/channel/cn/columns/sz8srm/stories/WS69f073a0a310942cc49a9e6a.html" target="_blank" rel="noopener">610 支战队决出冠军，首个 Agent 安全攻防赛圆满落幕</a> — 中国日报, 2026</li>
+      </ul>
+    </section>
+
+    <section id="cve">
+      <h2>CVE 研究</h2>
+      <p class="cve-intro">
+        因发现 Android、iOS、macOS、Chrome 及主要厂商生态系统中数百个严重漏洞，获得 Google、苹果、三星、华为、OPPO 等厂商致谢。
+      </p>
+      <div class="cve-list">
+        CVE-2015-3854, CVE-2015-3855, CVE-2015-3856, CVE-2015-6612, CVE-2015-6620, CVE-2015-6622,
+        CVE-2016-0811, CVE-2016-3832, CVE-2016-6705, CVE-2016-8395, CVE-2016-8399, CVE-2016-6768,
+        CVE-2016-6788, CVE-2016-8395, CVE-2017-0325, CVE-2017-0337, CVE-2017-0382, CVE-2017-0427,
+        CVE-2017-0476, CVE-2017-0544, CVE-2017-13246, CVE-2017-0861, CVE-2017-0866, CVE-2017-13167,
+        CVE-2017-13324, CVE-2017-15868, CVE-2017-2692, CVE-2017-2693, CVE-2016-5197, CVE-2016-1815,
+        CVE-2016-1860, CVE-2016-4697, CVE-2016-7714, CVE-2016-7624, CVE-2016-7625, CVE-2016-7620,
+        CVE-2017-2416, CVE-2018-9143, CVE-2018-9139, CVE-2018-9140, CVE-2018-9142, CVE-2018-9141,
+        CVE-2018-10500, CVE-2018-10497, CVE-2018-10499, CVE-2018-10498, CVE-2019-14783, CVE-2019-16253,
+        CVE-2019-16509, CVE-2019-17628, CVE-2021-0515, CVE-2021-0691, CVE-2021-39734, CVE-2021-25492,
+        CVE-2021-25493, CVE-2021-25494, CVE-2021-25495, CVE-2021-25496, CVE-2021-25497, CVE-2021-25498,
+        CVE-2021-25418, CVE-2021-25510, CVE-2021-25511, CVE-2021-25485, CVE-2021-25450, CVE-2021-23243,
+        CVE-2021-0691, CVE-2021-0515, CVE-2021-0393, CVE-2022-33704, CVE-2022-33703, CVE-2022-39862,
+        CVE-2022-28791, CVE-2022-30743, CVE-2022-36857, CVE-2022-30731, CVE-2022-30715, CVE-2022-39857,
+        CVE-2022-24931, CVE-2022-22263, CVE-2022-22264, CVE-2022-20146, CVE-2022-20172,
+        CVE-2025-32321, CVE-2025-8192
+      </div>
+    </section>
+
+    <section id="patents">
+      <h2>专利</h2>
+      <ul class="plain-list">
+        <li>应用程序安装包的漏洞检测方法、装置、系统及设备 · CN121479793A · 2026</li>
+      </ul>
+    </section>
+
+  </main>
+</div>
+</body>
+</html>
