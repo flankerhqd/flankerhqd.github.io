@@ -3,7 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>何淇丹（Flanker）— 安全研究员</title>
+  <title>何淇丹（Flanker）— AI 安全研究者</title>
+  <meta name="description" content="何淇丹（Flanker），安全研究者，聚焦 AI 与安全的交叉：AI Agent 安全、大模型攻防与 AI for Security。Pwn2Own 冠军、Pwnie Award 得主，数百个严重 CVE 发现者，开源 AI 手机 OpenCyvis 作者。">
+  <meta property="og:title" content="何淇丹（Flanker）— AI 安全研究者">
+  <meta property="og:description" content="AI Agent 安全、大模型攻防与 AI for Security。Pwn2Own 冠军、Pwnie Award 得主，开源 AI 手机 OpenCyvis 作者。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://flanker017.me/zh.html">
+  <meta property="og:image" content="https://flanker017.me/avatar.jpg">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -186,6 +192,18 @@
     }
 
     /* ── Publications ── */
+    .pub-group-title {
+      font-size: 12.5px;
+      font-family: 'Helvetica Neue', sans-serif;
+      font-weight: bold;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin: 26px 0 12px;
+    }
+
+    .pub-group-title:first-of-type { margin-top: 0; }
+
     .pub-list {
       list-style: decimal;
       padding-left: 22px;
@@ -265,7 +283,17 @@
       color: var(--muted);
       line-height: 1.95;
       word-break: break-all;
+      margin-top: 10px;
     }
+
+    .cve-details summary {
+      cursor: pointer;
+      font-size: 13px;
+      font-family: 'Helvetica Neue', sans-serif;
+      color: var(--accent);
+    }
+
+    .cve-details summary:hover { text-decoration: underline; }
 
     /* ── Responsive ── */
     @media (max-width: 760px) {
@@ -296,7 +324,7 @@
     </div>
 
     <div class="sidebar-name">何淇丹（Flanker）</div>
-    <div class="sidebar-role">高级总监 &amp; 首席安全研究员</div>
+    <div class="sidebar-role">安全研究者 · AI × 攻防</div>
 
     <ul class="sidebar-links">
       <li><a href="mailto:i@flanker017.me"><span class="icon">✉</span> 邮件</a></li>
@@ -312,6 +340,8 @@
     <nav>
       <ul class="sidebar-nav">
         <li><a href="#bio">简介</a></li>
+        <li><a href="#highlights">近期动态</a></li>
+        <li><a href="#projects">项目与开源</a></li>
         <li><a href="#publications">论文与演讲</a></li>
         <li><a href="#awards">荣誉与奖项</a></li>
         <li><a href="#service">学术与社会服务</a></li>
@@ -330,11 +360,13 @@
       <h2>简介</h2>
       <div class="bio">
         <p>
-          我是<strong>京东集团</strong>高级总监及首席安全研究员，专注于大规模安全体系建设、风险控制与 AI 驱动的防御能力。我创立了
-          <a href="https://dawnslab.jd.com/" target="_blank" rel="noopener"><strong>獬豸安全实验室</strong></a>，并现兼管广告营销反作弊业务，覆盖安全研究、广告反欺诈、威胁情报、供应链基础设施安全及 AI for Security 方向。我同时担任京东博士管培生导师与 TGT（Tech Genius Team）导师，指导多名博士及顶尖技术人才。
+          我是一名安全研究者，工作聚焦 <strong>AI 与安全的交叉</strong>：AI Agent 安全、大模型攻防，以及用 AI 重构大规模威胁对抗。我拥有近二十年顶尖攻防积累（Pwn2Own 冠军、Pwnie Award、数百个严重 CVE），现专注于把这套能力带入 AI 时代。我构建了开源 AI 手机 <a href="https://opencyvis.ai/" target="_blank" rel="noopener"><strong>OpenCyvis</strong></a>——一项针对 <strong>AI Agent 系统安全设计</strong>的开源实践：Agent 框架与模型选择完全开放，支持端侧本地模型，用户可以审计代码、掌控数据流向，为可控、可审计的 AI 原生系统建立范式。在产业实践中，我负责<strong>基于 AI 的大规模欺诈对抗与异常检测（AI for Security）</strong>，把大模型与多模态检测能力落地到广告营销场景的黑灰产对抗中。
         </p>
         <p>
-          我目前参与创建 <a href="https://opencyvis.ai/" target="_blank" rel="noopener">OpenCyvis</a>——一款开源 AI 手机，旨在提供可审计、用户可控的替代方案，对抗黑盒商业 AI 手机。OpenCyvis 的 Agent 框架与模型选择完全开放：开发者可以查阅代码、选择自己的 AI 模型、运行本地模型，并掌控数据流向。该项目融合了我在移动安全、AI Agent、自动化与可控 AI 原生系统方面的研究兴趣。
+          我现任<strong>京东集团</strong>高级总监及首席安全研究员，创立了 <a href="https://dawnslab.jd.com/" target="_blank" rel="noopener"><strong>獬豸安全实验室</strong></a>，工作覆盖安全研究、威胁情报与供应链基础设施安全。我同时担任京东博士管培生导师与 TGT（Tech Genius Team）导师，指导多名博士及顶尖技术人才。
+        </p>
+        <p>
+          近年来，我的研究进一步延伸至<strong>端侧可信执行环境（TEE）与可信计算</strong>——借助 ARM TrustZone、安全飞地（Secure Enclave）及机密计算等硬件级隔离能力，保护端侧 AI 模型、密钥与敏感用户数据，并为运行在边缘侧的 AI 原生系统建立可验证、可远程证明的信任根。
         </p>
         <p>
           此前，我曾主导拼多多安全团队，从零搭建其安全体系；更早之前，我在腾讯科恩安全实验室从事前沿漏洞研究与移动安全工作。我是 <a href="https://www.zerodayinitiative.com/blog/tag/Pwn2Own" target="_blank" rel="noopener">Pwn2Own</a> 2016、Mobile Pwn2Own 2016 与 2017 冠军，成功攻破当时最新版 macOS 和 Android 系统，荣获 <strong>Master of Pwn</strong> 称号。我是<a href="https://www.insc.tsinghua.edu.cn/info/1184/4013.htm" target="_blank" rel="noopener">蓝莲花战队</a>早期创始成员之一——这是亚洲首支打入 DEF CON CTF 总决赛的战队；同时也是浙江大学 AAA 战队与网络安全协会的创始成员。
@@ -343,29 +375,59 @@
           我的研究成果曾在 Black Hat、DEF CON、CanSecWest 等顶级安全会议上发表。我多次获得 Pwn2Own 冠军，并荣获 <a href="https://pwnies.com/mystique-in-the-house-the-droid-vulnerability-chain-that-owns-all-your-userspace/" target="_blank" rel="noopener"><strong>2022 年 Pwnie Award 最佳提权漏洞奖</strong></a>。我因发现数百个严重 CVE 漏洞，获得 Google、三星、苹果、华为等厂商致谢，并在 ACM ISSTA、USENIX 等顶级学术会议发表论文。我担任国际顶级安全竞赛 GeekPwn 评审委员，以及中国计算机学会（CCF）网络与系统安全专业委员会执行委员。
         </p>
         <div class="bio-tags">
+          <span class="tag">AI Agent 安全</span>
+          <span class="tag">大模型攻防</span>
+          <span class="tag">AI for Security</span>
+          <span class="tag">端侧 AI 安全</span>
           <span class="tag">移动安全</span>
           <span class="tag">漏洞研究</span>
           <span class="tag">Android / iOS</span>
           <span class="tag">IoT 安全</span>
           <span class="tag">软件供应链安全</span>
-          <span class="tag">广告反欺诈</span>
-          <span class="tag">AI 安全</span>
+          <span class="tag">TEE / 可信计算</span>
           <span class="tag">模糊测试</span>
           <span class="tag">CISSP</span>
         </div>
       </div>
     </section>
 
+    <section id="highlights">
+      <h2>近期动态</h2>
+      <ul class="plain-list">
+        <li><strong>2026</strong> — ARKDecompiler（HarmonyOS Next 反编译器）入选 <a href="https://blackhat.com/us-26/arsenal/schedule/index.html#from-breakthrough-to-completeness-arkdecompiler---the-decompiler-for-harmonyos-next-52619" target="_blank" rel="noopener">Black Hat USA Arsenal</a></li>
+        <li><strong>2026</strong> — 担任首届 Agent 安全攻防赛评委，610 支战队参赛 · <a href="https://ex.chinadaily.com.cn/exchange/partners/82/rss/channel/cn/columns/sz8srm/stories/WS69f073a0a310942cc49a9e6a.html" target="_blank" rel="noopener">中国日报报道</a></li>
+        <li><strong>2025</strong> — 开源 AI 手机 <a href="https://opencyvis.ai/" target="_blank" rel="noopener">OpenCyvis</a> 发布，获 <a href="https://xdaforums.com/t/app-aosp-system-app-open-source-ai-opencyvis-the-open-source-ai-phone-agent-with-virtual-display-local-llm-support.4788070/" target="_blank" rel="noopener">XDA 报道</a></li>
+        <li><strong>2025</strong> — <a href="https://defcon.org/html/defcon-33/dc-33-speakers.html#content_60309" target="_blank" rel="noopener">DEF CON 33</a> 与 <a href="https://www.secwest.net/presentations-2025/badresolve-bypassing-androids-intent-checks-to-resurrect-launchanywhere-privilege-escalations" target="_blank" rel="noopener">CanSecWest</a> 议题：复活 Android LaunchAnywhere 提权攻击面</li>
+        <li><strong>2024</strong> — <a href="https://www.blackhat.com/us-24/briefings/schedule/#unveiling-mac-security-a-comprehensive-exploration-of-sandboxing-and-appdata-tcc-39452" target="_blank" rel="noopener">Black Hat USA</a> Mac 安全议题登上 <a href="https://news.ycombinator.com/item?id=41437611" target="_blank" rel="noopener">Hacker News</a>；AI × 安全方向论文发表于 ISSTA 2024（CCF-A）与 Data Intelligence</li>
+      </ul>
+    </section>
+
+    <section id="projects">
+      <h2>项目与开源</h2>
+      <ul class="plain-list">
+        <li><a href="https://opencyvis.ai/" target="_blank" rel="noopener"><strong>OpenCyvis</strong></a> — 开源 AI 手机：可审计、用户可控的 AI Agent 系统，支持虚拟显示与端侧本地模型</li>
+        <li><strong>ARKDecompiler</strong> — HarmonyOS Next（方舟字节码）反编译器 · Black Hat USA Arsenal 2026</li>
+        <li><strong>RIDE</strong> — Android 系统高精度自动化漏洞挖掘框架 · Black Hat USA Arsenal 2022</li>
+        <li><strong>PMDET</strong> — 基于模糊测试的 Android Parcel Mismatch 漏洞检测工具 · Black Hat Asia Arsenal / SANER 2024</li>
+      </ul>
+    </section>
+
     <section id="publications">
       <h2>论文与演讲</h2>
+
+      <h3 class="pub-group-title">AI × 安全</h3>
+      <ol class="pub-list">
+        <li>Uncovering and Mitigating the Impact of Code Obfuscation on Dataset Annotation with Antivirus Engines. <a class="pub-venue" href="https://conf.researchr.org/home/issta-2024" target="_blank" rel="noopener">ISSTA 2024</a>, 维也纳. 2024. <span class="badge badge-a">CCF-A</span></li>
+        <li>Detecting Novel Malware Classes with a Foundational Multi-Modality Data Analysis Model. <a class="pub-venue" href="https://direct.mit.edu/dint" target="_blank" rel="noopener">Data Intelligence</a>. 2024.</li>
+      </ol>
+
+      <h3 class="pub-group-title">系统与移动安全</h3>
       <ol class="pub-list">
         <li>From Breakthrough to Completeness: ARKDecompiler — The Decompiler for HarmonyOS Next. <a class="pub-venue" href="https://blackhat.com/us-26/arsenal/schedule/index.html#from-breakthrough-to-completeness-arkdecompiler---the-decompiler-for-harmonyos-next-52619" target="_blank" rel="noopener">Black Hat USA Arsenal</a>, 拉斯维加斯. 2026. <span class="badge badge-bh">BH Arsenal</span></li>
         <li>BadResolve: Bypassing Android's Intent Checks to Resurrect LaunchAnywhere Privilege Escalations. <a class="pub-venue" href="https://www.secwest.net/presentations-2025/badresolve-bypassing-androids-intent-checks-to-resurrect-launchanywhere-privilege-escalations" target="_blank" rel="noopener">CanSecWest</a>, 温哥华. 2025.</li>
         <li>Dead Made Alive Again: Bypassing Intent Destination Checks and Reintroducing LaunchAnyWhere Privilege Escalation. <a class="pub-venue" href="https://defcon.org/html/defcon-33/dc-33-speakers.html#content_60309" target="_blank" rel="noopener">DEF CON 33</a>, 拉斯维加斯. 2025. <span class="badge badge-dc">DEF CON</span></li>
         <li>Unveiling Mac Security: A Comprehensive Exploration of Sandboxing and AppData TCC. <a class="pub-venue" href="https://www.blackhat.com/us-24/briefings/schedule/#unveiling-mac-security-a-comprehensive-exploration-of-sandboxing-and-appdata-tcc-39452" target="_blank" rel="noopener">Black Hat USA</a>, 拉斯维加斯. 2024. <span class="badge badge-bh">BH USA</span></li>
-        <li>Uncovering and Mitigating the Impact of Code Obfuscation on Dataset Annotation with Antivirus Engines. <a class="pub-venue" href="https://conf.researchr.org/home/issta-2024" target="_blank" rel="noopener">ISSTA 2024</a>, 维也纳. 2024. <span class="badge badge-a">CCF-A</span></li>
         <li>PMDET: A new fuzzing-based detection tool for Android Parcel Mismatch bugs. <a class="pub-venue" href="https://ieeexplore.ieee.org/document/10589833/" target="_blank" rel="noopener">SANER 2024</a>, 芬兰. 2024. <span class="badge badge-b">CCF-B</span></li>
-        <li>Detecting Novel Malware Classes with a Foundational Multi-Modality Data Analysis Model. <a class="pub-venue" href="https://direct.mit.edu/dint" target="_blank" rel="noopener">Data Intelligence</a>. 2024.</li>
         <li>PMDET: A new fuzzing-based detection tool for Android Parcel Mismatch bugs. <a class="pub-venue" href="https://www.blackhat.com/asia-24/arsenal/schedule/" target="_blank" rel="noopener">Black Hat Asia Arsenal</a>, 新加坡. 2024. <span class="badge badge-bh">BH Arsenal</span></li>
         <li>RIDE: Efficient Highly-Precise Systematic Automatic Bug Hunting in Android Systems. <a class="pub-venue" href="https://www.blackhat.com/us-22/arsenal/schedule/" target="_blank" rel="noopener">Black Hat USA Arsenal</a>, 拉斯维加斯. 2022. <span class="badge badge-bh">BH Arsenal</span></li>
         <li>Mystique in the House: The Droid Vulnerability Chain that Owns All Your Applications. <a class="pub-venue" href="https://www.secwest.net/csw22presentations/mystiquehits" target="_blank" rel="noopener">CanSecWest</a>, 温哥华. 2022.</li>
@@ -402,6 +464,7 @@
     <section id="service">
       <h2>学术与社会服务</h2>
       <ul class="plain-list">
+        <li>评委，首届 <a href="https://ex.chinadaily.com.cn/exchange/partners/82/rss/channel/cn/columns/sz8srm/stories/WS69f073a0a310942cc49a9e6a.html" target="_blank" rel="noopener">Agent 安全攻防赛</a>. 2026.</li>
         <li>评审委员，GeekPwn &amp; GeekCon 国际顶级安全竞赛</li>
         <li>中国计算机学会（CCF）网络与系统安全专业委员会执行委员</li>
         <li>导师，京东 TGT（Tech Genius Team）顶级全球人才项目</li>
@@ -428,19 +491,19 @@
     <section id="coverage">
       <h2>媒体报道</h2>
       <ul class="plain-list">
+        <li><a href="https://ex.chinadaily.com.cn/exchange/partners/82/rss/channel/cn/columns/sz8srm/stories/WS69f073a0a310942cc49a9e6a.html" target="_blank" rel="noopener">610 支战队决出冠军，首个 Agent 安全攻防赛圆满落幕</a> — 中国日报, 2026</li>
+        <li><a href="https://xdaforums.com/t/app-aosp-system-app-open-source-ai-opencyvis-the-open-source-ai-phone-agent-with-virtual-display-local-llm-support.4788070/" target="_blank" rel="noopener">OpenCyvis — 支持虚拟显示与本地 LLM 的开源 AI 手机 Agent</a> — XDA Forums, 2025</li>
+        <li><a href="https://news.ycombinator.com/item?id=41437611" target="_blank" rel="noopener">Unveiling Mac Security: Comprehensive Exploration of Sandboxing and AppData TCC</a> — Hacker News, 2024</li>
+        <li><a href="https://www.darkreading.com/edge-slideshows/the-highlights-of-the-2022-pwnie-awards" target="_blank" rel="noopener">2022 年 Pwnie Awards 精彩回顾</a> — Dark Reading, 2022</li>
+        <li><a href="https://bbs.kanxue.com/article-11715.htm" target="_blank" rel="noopener">对话 Flanker | 十年饮冰，难凉热血</a> — 看雪安全论坛, 2020</li>
         <li><a href="https://www.securityweek.com/nexus-6p-iphone-6s-hacked-mobile-pwn2own-2016/" target="_blank" rel="noopener">Nexus 6P、iPhone 6S 在 Mobile Pwn2Own 2016 被攻破</a> — SecurityWeek, 2016</li>
         <li><a href="http://www.news.zju.edu.cn/2016/1103/c775a246883/page.htm" target="_blank" rel="noopener">浙大学生在顶级黑客大赛上夺冠，十秒钟攻破谷歌智能手机</a> — 钱江晚报（转自浙大新闻网）, 2016</li>
         <li><a href="https://china.huanqiu.com/article/9CaKrnK3Ur6" target="_blank" rel="noopener">浙大黑客团队夺得 Pwn2Own 世界冠军</a> — 环球网, 2017</li>
-        <li><a href="https://bbs.kanxue.com/article-11715.htm" target="_blank" rel="noopener">对话 Flanker | 十年饮冰，难凉热血</a> — 看雪安全论坛, 2020</li>
-        <li><a href="https://www.darkreading.com/edge-slideshows/the-highlights-of-the-2022-pwnie-awards" target="_blank" rel="noopener">2022 年 Pwnie Awards 精彩回顾</a> — Dark Reading, 2022</li>
         <li><a href="https://securityaffairs.com/52723/hacking/pwn2own-2016.html" target="_blank" rel="noopener">Pwn2Own 2016 — 腾讯科恩安全实验室夺冠</a> — Security Affairs, 2016</li>
         <li><a href="https://venturebeat.com/security/pwn2own-2016-chrome-edge-and-safari-hacked-460k-awarded-in-total/" target="_blank" rel="noopener">Pwn2Own 2016：Chrome、Edge、Safari 被攻破，共奖励 46 万美元</a> — VentureBeat, 2016</li>
         <li><a href="https://thehackernews.com/2016/10/hacking-team-pwn2own.html" target="_blank" rel="noopener">中国黑客在 Mobile Pwn2Own 攻破 iPhone 和 Nexus，赢得 21.5 万美元</a> — The Hacker News, 2016</li>
         <li><a href="http://edu.people.com.cn/n1/2017/0706/c1053-29386949.html" target="_blank" rel="noopener">腾讯、360 安全提名黑客界"奥斯卡" Pwnie Award</a> — 人民日报, 2017</li>
-        <li><a href="https://news.ycombinator.com/item?id=41437611" target="_blank" rel="noopener">Unveiling Mac Security: Comprehensive Exploration of Sandboxing and AppData TCC</a> — Hacker News, 2024</li>
-        <li><a href="https://xdaforums.com/t/app-aosp-system-app-open-source-ai-opencyvis-the-open-source-ai-phone-agent-with-virtual-display-local-llm-support.4788070/" target="_blank" rel="noopener">OpenCyvis — 支持虚拟显示与本地 LLM 的开源 AI 手机 Agent</a> — XDA Forums, 2025</li>
         <li><a href="https://m.21jingji.com/article/20150509/3e723887b0e4c4123323a57afa13adb1.html" target="_blank" rel="noopener">专访信息安全专家何淇丹：如何让可穿戴设备更安全？</a> — 21 世纪经济报道, 2015</li>
-        <li><a href="https://ex.chinadaily.com.cn/exchange/partners/82/rss/channel/cn/columns/sz8srm/stories/WS69f073a0a310942cc49a9e6a.html" target="_blank" rel="noopener">610 支战队决出冠军，首个 Agent 安全攻防赛圆满落幕</a> — 中国日报, 2026</li>
       </ul>
     </section>
 
@@ -449,7 +512,9 @@
       <p class="cve-intro">
         因发现 Android、iOS、macOS、Chrome 及主要厂商生态系统中数百个严重漏洞，获得 Google、苹果、三星、华为、OPPO 等厂商致谢。
       </p>
-      <div class="cve-list">
+      <details class="cve-details">
+        <summary>展开完整 CVE 编号列表</summary>
+        <div class="cve-list">
         CVE-2015-3854, CVE-2015-3855, CVE-2015-3856, CVE-2015-6612, CVE-2015-6620, CVE-2015-6622,
         CVE-2016-0811, CVE-2016-3832, CVE-2016-6705, CVE-2016-8395, CVE-2016-8399, CVE-2016-6768,
         CVE-2016-6788, CVE-2016-8395, CVE-2017-0325, CVE-2017-0337, CVE-2017-0382, CVE-2017-0427,
@@ -465,7 +530,8 @@
         CVE-2022-28791, CVE-2022-30743, CVE-2022-36857, CVE-2022-30731, CVE-2022-30715, CVE-2022-39857,
         CVE-2022-24931, CVE-2022-22263, CVE-2022-22264, CVE-2022-20146, CVE-2022-20172,
         CVE-2025-32321, CVE-2025-8192
-      </div>
+        </div>
+      </details>
     </section>
 
     <section id="patents">

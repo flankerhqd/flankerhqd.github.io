@@ -3,7 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Frank (Flanker) — Security Researcher</title>
+  <title>Qidan He (Flanker) — AI &amp; Security Researcher</title>
+  <meta name="description" content="Qidan He (Flanker), security researcher working at the intersection of AI and security: AI agent security, LLM attack & defense, and AI for Security. Pwn2Own champion, Pwnie Award winner, hundreds of critical CVEs, author of the open-source AI phone OpenCyvis.">
+  <meta property="og:title" content="Qidan He (Flanker) — AI &amp; Security Researcher">
+  <meta property="og:description" content="AI agent security, LLM attack & defense, and AI for Security. Pwn2Own champion, Pwnie Award winner, author of the open-source AI phone OpenCyvis.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://flanker017.me/">
+  <meta property="og:image" content="https://flanker017.me/avatar.jpg">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -228,6 +234,18 @@
     }
 
     /* ── Publications ── */
+    .pub-group-title {
+      font-size: 12.5px;
+      font-family: 'Helvetica Neue', sans-serif;
+      font-weight: bold;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin: 26px 0 12px;
+    }
+
+    .pub-group-title:first-of-type { margin-top: 0; }
+
     .pub-list {
       list-style: decimal;
       padding-left: 22px;
@@ -307,7 +325,17 @@
       color: var(--muted);
       line-height: 1.95;
       word-break: break-all;
+      margin-top: 10px;
     }
+
+    .cve-details summary {
+      cursor: pointer;
+      font-size: 13px;
+      font-family: 'Helvetica Neue', sans-serif;
+      color: var(--accent);
+    }
+
+    .cve-details summary:hover { text-decoration: underline; }
 
     /* ── Responsive ── */
     @media (max-width: 760px) {
@@ -339,7 +367,7 @@
 
     <div class="sidebar-name">Frank (Flanker)</div>
     <div class="sidebar-alias">Qidan He · 何淇丹</div>
-    <div class="sidebar-role">Senior Director &amp; Chief Security Researcher</div>
+    <div class="sidebar-role">Security Researcher · AI × Offensive Security</div>
 
     <ul class="sidebar-links">
       <li><a href="mailto:i@flanker017.me"><span class="icon">✉</span> Email</a></li>
@@ -355,6 +383,8 @@
     <nav>
       <ul class="sidebar-nav">
         <li><a href="#bio">About</a></li>
+        <li><a href="#highlights">Recent Highlights</a></li>
+        <li><a href="#projects">Projects</a></li>
         <li><a href="#publications">Publications</a></li>
         <li><a href="#awards">Awards</a></li>
         <li><a href="#service">Service</a></li>
@@ -373,19 +403,28 @@
       <h2>About</h2>
       <div class="bio">
         <p>
-          I am Senior Director and Chief Security Researcher at <strong>JD.com Group</strong>, with a focus on
-          building large-scale security, risk control, and AI-driven defense capabilities. I founded
-          <a href="https://dawnslab.jd.com/" target="_blank" rel="noopener"><strong>Xiezhi Security Lab</strong></a> (also known as Dawn Security Lab) and now also lead advertising
-          and marketing risk control initiatives, covering advanced security research, advertising anti-fraud,
-          threat intelligence, strategic security infrastructure, and AI for security. I also serve as a
-          doctoral management trainee mentor and TGT (Tech Genius Team) mentor at JD.com, supervising multiple PhDs and top technical talents.
+          I am a security researcher working at the <strong>intersection of AI and security</strong>: AI agent
+          security, LLM attack &amp; defense, and AI-driven threat detection at scale. A multiple-time Pwn2Own
+          champion and Pwnie Award winner with hundreds of critical CVEs, I now focus on bringing two decades of
+          top-tier offensive security into the AI era. I built <a href="https://opencyvis.ai/" target="_blank" rel="noopener"><strong>OpenCyvis</strong></a>,
+          an open-source AI phone and a working exercise in <strong>security design for AI agent systems</strong>:
+          the agent stack and model choice are fully open — users can audit the code, run local models on-device,
+          and control where their data goes — a blueprint for controllable, auditable AI-native systems. On the
+          industry side, I lead <strong>AI-based large-scale fraud fighting and anomaly detection (AI for
+          Security)</strong>, applying LLMs and multi-modal detection to real-world abuse in advertising and marketing.
         </p>
         <p>
-          I am also working on <a href="https://opencyvis.ai/" target="_blank" rel="noopener">OpenCyvis</a>,
-          an open-source AI phone built as an auditable and user-controlled alternative to black-box commercial
-          AI phones. OpenCyvis keeps both the agent stack and model choice open: developers can inspect the code,
-          choose their own AI model, run local models, and control where their data goes. The project connects my
-          interests in mobile security, AI agents, automation, and controllable AI-native systems.
+          I am Senior Director and Chief Security Researcher at <strong>JD.com Group</strong>, where I founded
+          <a href="https://dawnslab.jd.com/" target="_blank" rel="noopener"><strong>Xiezhi Security Lab</strong></a> (also known as Dawn Security Lab),
+          covering advanced security research, threat intelligence, and strategic security infrastructure. I also
+          serve as a doctoral management trainee mentor and TGT (Tech Genius Team) mentor at JD.com, supervising
+          multiple PhDs and top technical talents.
+        </p>
+        <p>
+          More recently, my research has expanded into <strong>device-side Trusted Execution Environments (TEE)
+          and trusted computing</strong> — leveraging hardware-rooted isolation such as ARM TrustZone, secure
+          enclaves, and confidential computing to protect on-device AI models, cryptographic keys, and sensitive
+          user data, and to establish verifiable, remotely-attestable trust for AI-native systems running at the edge.
         </p>
         <p>
           Previously, I led Pinduoduo's security team and built its security infrastructure from the ground up.
@@ -403,29 +442,59 @@
           of the international hacking competition GeekPwn, and an Executive Committee Member of the China Computer Federation (CCF) Technical Committee on Security and Privacy.
         </p>
         <div class="bio-tags">
+          <span class="tag">AI Agent Security</span>
+          <span class="tag">LLM Attack &amp; Defense</span>
+          <span class="tag">AI for Security</span>
+          <span class="tag">On-Device AI Security</span>
           <span class="tag">Mobile Security</span>
           <span class="tag">Vulnerability Research</span>
           <span class="tag">Android / iOS</span>
           <span class="tag">IoT Security</span>
           <span class="tag">Software Supply Chain</span>
-          <span class="tag">Ad Fraud / Anti-cheat</span>
-          <span class="tag">AI Security</span>
+          <span class="tag">TEE / Trusted Computing</span>
           <span class="tag">Fuzzing</span>
           <span class="tag">CISSP</span>
         </div>
       </div>
     </section>
 
+    <section id="highlights">
+      <h2>Recent Highlights</h2>
+      <ul class="plain-list">
+        <li><strong>2026</strong> — ARKDecompiler, the decompiler for HarmonyOS Next, accepted at <a href="https://blackhat.com/us-26/arsenal/schedule/index.html#from-breakthrough-to-completeness-arkdecompiler---the-decompiler-for-harmonyos-next-52619" target="_blank" rel="noopener">Black Hat USA Arsenal</a></li>
+        <li><strong>2026</strong> — Served as judge of China's first Agent Security Attack-Defense Championship, with 610 competing teams · <a href="https://ex.chinadaily.com.cn/exchange/partners/82/rss/channel/cn/columns/sz8srm/stories/WS69f073a0a310942cc49a9e6a.html" target="_blank" rel="noopener">covered by China Daily</a></li>
+        <li><strong>2025</strong> — Open-source AI phone <a href="https://opencyvis.ai/" target="_blank" rel="noopener">OpenCyvis</a> released, <a href="https://xdaforums.com/t/app-aosp-system-app-open-source-ai-opencyvis-the-open-source-ai-phone-agent-with-virtual-display-local-llm-support.4788070/" target="_blank" rel="noopener">featured on XDA</a></li>
+        <li><strong>2025</strong> — Talks at <a href="https://defcon.org/html/defcon-33/dc-33-speakers.html#content_60309" target="_blank" rel="noopener">DEF CON 33</a> and <a href="https://www.secwest.net/presentations-2025/badresolve-bypassing-androids-intent-checks-to-resurrect-launchanywhere-privilege-escalations" target="_blank" rel="noopener">CanSecWest</a>: resurrecting LaunchAnywhere privilege escalation on Android</li>
+        <li><strong>2024</strong> — <a href="https://www.blackhat.com/us-24/briefings/schedule/#unveiling-mac-security-a-comprehensive-exploration-of-sandboxing-and-appdata-tcc-39452" target="_blank" rel="noopener">Black Hat USA</a> talk on Mac security reached the front page of <a href="https://news.ycombinator.com/item?id=41437611" target="_blank" rel="noopener">Hacker News</a>; AI × security papers published at ISSTA 2024 (CCF-A) and Data Intelligence</li>
+      </ul>
+    </section>
+
+    <section id="projects">
+      <h2>Projects &amp; Open Source</h2>
+      <ul class="plain-list">
+        <li><a href="https://opencyvis.ai/" target="_blank" rel="noopener"><strong>OpenCyvis</strong></a> — open-source AI phone: an auditable, user-controlled AI agent system with virtual display and on-device local LLM support</li>
+        <li><strong>ARKDecompiler</strong> — decompiler for HarmonyOS Next (Ark bytecode) · Black Hat USA Arsenal 2026</li>
+        <li><strong>RIDE</strong> — highly-precise systematic automatic bug hunting framework for Android systems · Black Hat USA Arsenal 2022</li>
+        <li><strong>PMDET</strong> — fuzzing-based detection tool for Android Parcel Mismatch bugs · Black Hat Asia Arsenal / SANER 2024</li>
+      </ul>
+    </section>
+
     <section id="publications">
       <h2>Publications &amp; Talks</h2>
+
+      <h3 class="pub-group-title">AI × Security</h3>
+      <ol class="pub-list">
+        <li>Uncovering and Mitigating the Impact of Code Obfuscation on Dataset Annotation with Antivirus Engines. <a class="pub-venue" href="https://conf.researchr.org/home/issta-2024" target="_blank" rel="noopener">ISSTA 2024</a>, Vienna. 2024. <span class="badge badge-a">CCF-A</span></li>
+        <li>Detecting Novel Malware Classes with a Foundational Multi-Modality Data Analysis Model. <a class="pub-venue" href="https://direct.mit.edu/dint" target="_blank" rel="noopener">Data Intelligence</a>. 2024.</li>
+      </ol>
+
+      <h3 class="pub-group-title">Systems &amp; Mobile Security</h3>
       <ol class="pub-list">
         <li>From Breakthrough to Completeness: ARKDecompiler — The Decompiler for HarmonyOS Next. <a class="pub-venue" href="https://blackhat.com/us-26/arsenal/schedule/index.html#from-breakthrough-to-completeness-arkdecompiler---the-decompiler-for-harmonyos-next-52619" target="_blank" rel="noopener">Black Hat USA Arsenal</a>, Las Vegas. 2026. <span class="badge badge-bh">BH Arsenal</span></li>
         <li>BadResolve: Bypassing Android's Intent Checks to Resurrect LaunchAnywhere Privilege Escalations. <a class="pub-venue" href="https://www.secwest.net/presentations-2025/badresolve-bypassing-androids-intent-checks-to-resurrect-launchanywhere-privilege-escalations" target="_blank" rel="noopener">CanSecWest</a>, Vancouver. 2025.</li>
         <li>Dead Made Alive Again: Bypassing Intent Destination Checks and Reintroducing LaunchAnyWhere Privilege Escalation. <a class="pub-venue" href="https://defcon.org/html/defcon-33/dc-33-speakers.html#content_60309" target="_blank" rel="noopener">DEF CON 33</a>, Las Vegas. 2025. <span class="badge badge-dc">DEF CON</span></li>
         <li>Unveiling Mac Security: A Comprehensive Exploration of Sandboxing and AppData TCC. <a class="pub-venue" href="https://www.blackhat.com/us-24/briefings/schedule/#unveiling-mac-security-a-comprehensive-exploration-of-sandboxing-and-appdata-tcc-39452" target="_blank" rel="noopener">Black Hat USA</a>, Las Vegas. 2024. <span class="badge badge-bh">BH USA</span></li>
-        <li>Uncovering and Mitigating the Impact of Code Obfuscation on Dataset Annotation with Antivirus Engines. <a class="pub-venue" href="https://conf.researchr.org/home/issta-2024" target="_blank" rel="noopener">ISSTA 2024</a>, Vienna. 2024. <span class="badge badge-a">CCF-A</span></li>
         <li>PMDET: A new fuzzing-based detection tool for Android Parcel Mismatch bugs. <a class="pub-venue" href="https://ieeexplore.ieee.org/document/10589833/" target="_blank" rel="noopener">SANER 2024</a>, Finland. 2024. <span class="badge badge-b">CCF-B</span></li>
-        <li>Detecting Novel Malware Classes with a Foundational Multi-Modality Data Analysis Model. <a class="pub-venue" href="https://direct.mit.edu/dint" target="_blank" rel="noopener">Data Intelligence</a>. 2024.</li>
         <li>PMDET: A new fuzzing-based detection tool for Android Parcel Mismatch bugs. <a class="pub-venue" href="https://www.blackhat.com/asia-24/arsenal/schedule/" target="_blank" rel="noopener">Black Hat Asia Arsenal</a>, Singapore. 2024. <span class="badge badge-bh">BH Arsenal</span></li>
         <li>RIDE: Efficient Highly-Precise Systematic Automatic Bug Hunting in Android Systems. <a class="pub-venue" href="https://www.blackhat.com/us-22/arsenal/schedule/" target="_blank" rel="noopener">Black Hat USA Arsenal</a>, Las Vegas. 2022. <span class="badge badge-bh">BH Arsenal</span></li>
         <li>Mystique in the House: The Droid Vulnerability Chain that Owns All Your Applications. <a class="pub-venue" href="https://www.secwest.net/csw22presentations/mystiquehits" target="_blank" rel="noopener">CanSecWest</a>, Vancouver. 2022.</li>
@@ -449,10 +518,7 @@
         <li><a href="https://pwnies.com/mystique-in-the-house-the-droid-vulnerability-chain-that-owns-all-your-userspace/" target="_blank" rel="noopener"><strong>Pwnie Award — Best Privilege Escalation</strong></a>, Black Hat USA, Las Vegas. 2022.</li>
         <li><a href="https://www.zerodayinitiative.com/blog/tag/Pwn2Own" target="_blank" rel="noopener"><strong>Pwn2Own Champion &amp; Master of Pwn</strong></a>, Tokyo and Vancouver. 2016, 2017.</li>
         <li><strong>Pwnie Award Nominee</strong>, Black Hat USA, Las Vegas. 2017.</li>
-        <li><strong>JD Group Hackathon — 1st Prize</strong>. 2025.</li>
-        <li><strong>JD Group Technology Golden Award Nominee</strong> (highest technical honor). 2023, 2024.</li>
-        <li><strong>JD Group CCO Highest Special Award</strong>. 2024.</li>
-        <li><strong>Tencent Company-Level Technical Breakthrough Award</strong> (highest technical honor). Tencent.</li>
+        <li><strong>Multiple top internal technical honors</strong> at JD.com and Tencent, including Tencent's company-level Technical Breakthrough Award and JD Group Hackathon 1st Prize (2025).</li>
         <li><strong>Google Security Hall of Fame</strong> — Top 10 in Android Category.</li>
         <li><strong>Samsung Security Hall of Fame</strong> — Ranked #6 (2021, 2022).</li>
         <li><strong>Huawei Security Hall of Fame</strong> — Ranked #3 (2020).</li>
@@ -462,6 +528,7 @@
     <section id="service">
       <h2>Professional Service</h2>
       <ul class="plain-list">
+        <li>Judge, China's first <a href="https://ex.chinadaily.com.cn/exchange/partners/82/rss/channel/cn/columns/sz8srm/stories/WS69f073a0a310942cc49a9e6a.html" target="_blank" rel="noopener">Agent Security Attack-Defense Championship</a>. 2026.</li>
         <li>Competition Judge, GeekPwn &amp; GeekCon (international top security competition)</li>
         <li>Executive Committee Member, China Computer Federation (CCF) Technical Committee on Security and Privacy</li>
         <li>Mentor, JD.com TGT (Tech Genius Team) — Top Global Talent Program</li>
@@ -487,19 +554,19 @@
     <section id="coverage">
       <h2>Selected Coverage</h2>
       <ul class="plain-list">
+        <li><a href="https://ex.chinadaily.com.cn/exchange/partners/82/rss/channel/cn/columns/sz8srm/stories/WS69f073a0a310942cc49a9e6a.html" target="_blank" rel="noopener">610 Teams Compete in China's First Agent Security Attack-Defense Championship</a> — China Daily, 2026</li>
+        <li><a href="https://xdaforums.com/t/app-aosp-system-app-open-source-ai-opencyvis-the-open-source-ai-phone-agent-with-virtual-display-local-llm-support.4788070/" target="_blank" rel="noopener">OpenCyvis — open-source AI phone agent with Virtual Display + local LLM support</a> — XDA Forums, 2025</li>
+        <li><a href="https://news.ycombinator.com/item?id=41437611" target="_blank" rel="noopener">Unveiling Mac Security: Comprehensive Exploration of Sandboxing and AppData TCC</a> — Hacker News, 2024</li>
+        <li><a href="https://www.darkreading.com/edge-slideshows/the-highlights-of-the-2022-pwnie-awards" target="_blank" rel="noopener">Highlights of the 2022 Pwnie Awards</a> — Dark Reading, 2022</li>
+        <li><a href="https://bbs.kanxue.com/article-11715.htm" target="_blank" rel="noopener">Interview with Flanker: A Decade of Hardship, Yet Passion Remains Unquenched</a> — KanXue Security Forum, 2020</li>
         <li><a href="https://www.securityweek.com/nexus-6p-iphone-6s-hacked-mobile-pwn2own-2016/" target="_blank" rel="noopener">Nexus 6P, iPhone 6S Hacked at Mobile Pwn2Own 2016</a> — SecurityWeek, 2016</li>
         <li><a href="http://www.news.zju.edu.cn/2016/1103/c775a246883/page.htm" target="_blank" rel="noopener">ZJU Student Wins Top Hacking Competition, Breaks Google Nexus in 10 Seconds</a> — Qianjiang Evening News (via ZJU), 2016</li>
         <li><a href="https://china.huanqiu.com/article/9CaKrnK3Ur6" target="_blank" rel="noopener">ZJU Hacker Team Wins Pwn2Own World Championship</a> — Huanqiu, 2017</li>
-        <li><a href="https://bbs.kanxue.com/article-11715.htm" target="_blank" rel="noopener">Interview with Flanker: A Decade of Hardship, Yet Passion Remains Unquenched</a> — KanXue Security Forum, 2020</li>
-        <li><a href="https://www.darkreading.com/edge-slideshows/the-highlights-of-the-2022-pwnie-awards" target="_blank" rel="noopener">Highlights of the 2022 Pwnie Awards</a> — Dark Reading, 2022</li>
         <li><a href="https://securityaffairs.com/52723/hacking/pwn2own-2016.html" target="_blank" rel="noopener">Pwn2Own 2016 — Tencent Keen Security Lab Wins</a> — Security Affairs, 2016</li>
         <li><a href="https://venturebeat.com/security/pwn2own-2016-chrome-edge-and-safari-hacked-460k-awarded-in-total/" target="_blank" rel="noopener">Pwn2Own 2016: Chrome, Edge, and Safari hacked, $460K awarded</a> — VentureBeat, 2016</li>
         <li><a href="https://thehackernews.com/2016/10/hacking-team-pwn2own.html" target="_blank" rel="noopener">Chinese Hackers won $215,000 for Hacking iPhone and Nexus at Mobile Pwn2Own</a> — The Hacker News, 2016</li>
         <li><a href="http://edu.people.com.cn/n1/2017/0706/c1053-29386949.html" target="_blank" rel="noopener">People's Daily: Tencent and 360 Security Nominated for Pwnie Award</a> — People's Daily, 2017</li>
-        <li><a href="https://news.ycombinator.com/item?id=41437611" target="_blank" rel="noopener">Unveiling Mac Security: Comprehensive Exploration of Sandboxing and AppData TCC</a> — Hacker News, 2024</li>
-        <li><a href="https://xdaforums.com/t/app-aosp-system-app-open-source-ai-opencyvis-the-open-source-ai-phone-agent-with-virtual-display-local-llm-support.4788070/" target="_blank" rel="noopener">OpenCyvis — open-source AI phone agent with Virtual Display + local LLM support</a> — XDA Forums, 2025</li>
         <li><a href="https://m.21jingji.com/article/20150509/3e723887b0e4c4123323a57afa13adb1.html" target="_blank" rel="noopener">Interview: How to Make Wearable Devices More Secure?</a> — 21st Century Business Herald, 2015</li>
-        <li><a href="https://ex.chinadaily.com.cn/exchange/partners/82/rss/channel/cn/columns/sz8srm/stories/WS69f073a0a310942cc49a9e6a.html" target="_blank" rel="noopener">610 Teams Compete in China's First Agent Security Attack-Defense Championship</a> — China Daily, 2026</li>
       </ul>
     </section>
 
@@ -509,7 +576,9 @@
         Credited by Google, Apple, Samsung, Huawei, Oppo, and others for discovering hundreds of critical
         vulnerabilities across Android, iOS, macOS, Chrome, and major vendor ecosystems.
       </p>
-      <div class="cve-list">
+      <details class="cve-details">
+        <summary>Show full CVE list</summary>
+        <div class="cve-list">
         CVE-2015-3854, CVE-2015-3855, CVE-2015-3856, CVE-2015-6612, CVE-2015-6620, CVE-2015-6622,
         CVE-2016-0811, CVE-2016-3832, CVE-2016-6705, CVE-2016-8395, CVE-2016-8399, CVE-2016-6768,
         CVE-2016-6788, CVE-2016-8395, CVE-2017-0325, CVE-2017-0337, CVE-2017-0382, CVE-2017-0427,
@@ -525,7 +594,8 @@
         CVE-2022-28791, CVE-2022-30743, CVE-2022-36857, CVE-2022-30731, CVE-2022-30715, CVE-2022-39857,
         CVE-2022-24931, CVE-2022-22263, CVE-2022-22264, CVE-2022-20146, CVE-2022-20172,
         CVE-2025-32321, CVE-2025-8192
-      </div>
+        </div>
+      </details>
     </section>
 
     <section id="patents">
