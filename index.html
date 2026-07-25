@@ -383,6 +383,7 @@
     <nav>
       <ul class="sidebar-nav">
         <li><a href="#bio">About</a></li>
+        <li><a href="#ai-security">AI × Security</a></li>
         <li><a href="#highlights">Recent Highlights</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#publications">Publications</a></li>
@@ -403,15 +404,10 @@
       <h2>About</h2>
       <div class="bio">
         <p>
-          I am a security researcher working at the <strong>intersection of AI and security</strong>: AI agent
-          security, LLM attack &amp; defense, and AI-driven threat detection at scale. A multiple-time Pwn2Own
-          champion and Pwnie Award winner with hundreds of critical CVEs, I now focus on bringing two decades of
-          top-tier offensive security into the AI era. I built <a href="https://opencyvis.ai/" target="_blank" rel="noopener"><strong>OpenCyvis</strong></a>,
-          an open-source AI phone and a working exercise in <strong>security design for AI agent systems</strong>:
-          the agent stack and model choice are fully open — users can audit the code, run local models on-device,
-          and control where their data goes — a blueprint for controllable, auditable AI-native systems. On the
-          industry side, I lead <strong>AI-based large-scale fraud fighting and anomaly detection (AI for
-          Security)</strong>, applying LLMs and multi-modal detection to real-world abuse in advertising and marketing.
+          I am a security researcher working at the <strong>intersection of AI and security</strong>: using AI to
+          rebuild security, and building security for AI systems themselves. A multiple-time Pwn2Own champion and
+          Pwnie Award winner with hundreds of critical CVEs, I now bring two decades of top-tier offensive security
+          into the AI era (see <a href="#ai-security">AI × Security</a> below).
         </p>
         <p>
           I am Senior Director and Chief Security Researcher at <strong>JD.com Group</strong>, where I founded
@@ -442,6 +438,8 @@
           of the international hacking competition GeekPwn, and an Executive Committee Member of the China Computer Federation (CCF) Technical Committee on Security and Privacy.
         </p>
         <div class="bio-tags">
+          <span class="tag">AI × Vulnerability Hunting</span>
+          <span class="tag">Agent Security Control Plane</span>
           <span class="tag">AI Agent Security</span>
           <span class="tag">LLM Attack &amp; Defense</span>
           <span class="tag">AI for Security</span>
@@ -456,6 +454,32 @@
           <span class="tag">CISSP</span>
         </div>
       </div>
+    </section>
+
+    <section id="ai-security">
+      <h2>AI × Security</h2>
+      <div class="bio">
+        <p>My work sits at the intersection of AI and security, along two lines: using AI to do security (AI for Security), and doing security for AI systems (Security for AI).</p>
+      </div>
+
+      <h3 class="pub-group-title">AI for Security</h3>
+      <ul class="plain-list">
+        <li><strong>AI × vulnerability hunting</strong> — exploring the limits of vulnerability hunting in the AI era, along two lines: multi-agent, self-evolving hunting infrastructure spanning foundational software, systems, internal infrastructure and client applications; and the training and fine-tuning of models specialized for vulnerability discovery. The system has found multiple critical vulnerabilities in <a href="https://offbyone.sg/talk/picasso-haohaochen-hongzeshang-yinyiwu" target="_blank" rel="noopener">V8</a>, <a href="https://defcon.org/html/defcon-33/dc-33-speakers.html#content_60309" target="_blank" rel="noopener">Android</a>, <a href="https://blackhat.com/us-26/arsenal/schedule/index.html#from-breakthrough-to-completeness-arkdecompiler---the-decompiler-for-harmonyos-next-52619" target="_blank" rel="noopener">HarmonyOS</a> and beyond.</li>
+        <li><strong>AI × anti-fraud and risk control</strong> — rebuilding advertising and marketing anti-fraud and risk control around AI: combining on-device risk sensing with a unified Transformer anti-fraud model across five advertising business lines, and using agents to drive self-iteration of both algorithms and data.</li>
+        <li><strong>AI × multi-modal abuse detection</strong> — fine-tuning and training multi-modal models on advertising domain knowledge, then pairing vision-language models with on-device automation agents that operate real apps and read what is on screen, to reproduce and record mobile ad-fraud behavior.</li>
+      </ul>
+
+      <h3 class="pub-group-title">Security for AI</h3>
+      <div class="bio">
+        <p>Once agents start acting on a person's behalf, the question to answer is: who initiated this call, on whose behalf, and does it exceed what they're authorized to do? My work here spans two levels: building security for AI businesses in production, and building open-source AI systems and the security tools that go with them.</p>
+      </div>
+      <ul class="plain-list">
+        <li><a href="https://github.com/opencyvis/cyvisguard" target="_blank" rel="noopener"><strong>CyVisGuard</strong></a> — open-source security control plane for AI agents (Apache-2.0). It sits between an agent and the resources it can reach, checking the identity, delegation chain and authorized scope behind every call and deciding on the tool's capability and data flow. Tainted context cannot leave, delegated tokens revoke in cascade, and a config change that would remove the guard itself is refused.</li>
+        <li><strong>Enterprise AI business security</strong> — building security for AI businesses running at production scale, covering consumer-facing conversational AI, agent-to-agent collaboration (including interconnection with external systems and third-party agents), and MCP (Model Context Protocol) tool calls. This spans both internal businesses and those interfacing with the outside. What matters is an agent's identity and authorization boundary, and the control of data flow and calls across trust boundaries.</li>
+        <li><a href="https://opencyvis.ai/" target="_blank" rel="noopener"><strong>OpenCyvis</strong></a> — open-source AI phone. The agent stack and model choice are fully open, on-device local models are supported, and users can audit the code and control where their data goes.</li>
+        <li><strong>Agent security, offense and research</strong> — judge of China's first <a href="https://ex.chinadaily.com.cn/exchange/partners/82/rss/channel/cn/columns/sz8srm/stories/WS69f073a0a310942cc49a9e6a.html" target="_blank" rel="noopener">Agent Security Attack-Defense Championship</a> (610 teams). Research covers the attack surface of mobile GUI agents, AI assistants used as a link in an attack chain, and the identity and authorization problems agents raise as independent actors.</li>
+        <li><strong>On-device AI and model security</strong> — the security of on-device models themselves, including model theft and extraction, the integrity of weights and inference, and the injection surface opened by on-device input; and the use of ARM TrustZone, Secure Enclave and confidential computing to protect on-device models, keys and user data, establishing a remotely attestable root of trust for AI at the edge.</li>
+      </ul>
     </section>
 
     <section id="highlights">
